@@ -51,7 +51,7 @@ const MainNavigator = createStackNavigator(
         },
     },
     {
-        initialRouteName: 'Home'
+        initialRouteName: 'Chat'
     }
 );
 

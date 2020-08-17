@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import styles from '../styles/tabScreenStyle'
 
 import BottomTab from '../components/BottomTab';
 
@@ -12,10 +13,9 @@ export default class Wallet extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-                <Text>Wallet screen</Text>
-
-                <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
+            <View style={styles.container}>
+                <Text>Wallet</Text>
+                <View style={styles.bottomTab}>
                     <BottomTab navigation={this.props.navigation} />
                 </View>
             </View>
