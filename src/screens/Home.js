@@ -1,30 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Dimensions, TextInput, Alert } from 'react-native';
-import { isNumberOnly, validateEmail } from '../services/helpers';
+import { View, Text, TouchableOpacity, Dimensions, TextInput } from 'react-native';
 
-export default class Login extends Component {
+import BottomTab from '../components/BottomTab';
+
+export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             userEmail: '',
             userPassword: ''
         };
-    }
-
-    validatedata() {
-        if (this.state.userEmail === '') {
-            Alert.alert('Email can not be blank.')
-        } else if (this.state.userPassword === '') {
-            Alert.alert('Password can not be blank.')
-        } else if (this.state.userPassword.length < 10) {
-            Alert.alert('Password length is minimum 10 characters.')
-        } else if (!isNumberOnly(this.state.userPassword)) {
-            Alert.alert('Enter numeric Password.')
-        } else if (!validateEmail(this.state.userEmail)) {
-            Alert.alert('Enter valid Email.')
-        } else {
-            this.props.navigation.navigate('ApplyLeaves')
-        }
     }
 
     render() {
@@ -35,7 +20,7 @@ export default class Login extends Component {
                 </View>
                 <View style={{ flex: 1.5, }}>
                     <View style={{ width: "100%", alignItems: "center", }}>
-                        <Text style={{ marginBottom: 20, color: "#78909c", fontWeight: "bold", fontSize: 18 }}>Login</Text>
+                        <Text style={{ marginBottom: 20, color: "#78909c", fontWeight: "bold", fontSize: 18 }}>Home</Text>
                         <TextInput
                             placeholder="Email"
                             keyboardType={'email-address'}
@@ -89,7 +74,7 @@ export default class Login extends Component {
 
                         <View style={{ width: "100%", alignItems: "center" }}>
                             <TouchableOpacity
-                                onPress={() => { this.validatedata() }}
+                                onPress={() => { console.log(" sign in pressed.") }}
                                 style={{// Setting up Hint Align center.
                                     width: Dimensions.get("window").width / 1.2,
                                     height: 50,
@@ -114,6 +99,10 @@ export default class Login extends Component {
                             </View>
                         </View>
                     </View>
+                </View>
+
+                <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
+                    <BottomTab navigation={this.props.navigation} />
                 </View>
             </View>
         );

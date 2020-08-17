@@ -1,47 +1,57 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 //app screens
-import Login from '../screens/Login';
-import ApplyLeaves from '../screens/ApplyLeaves';
-import ShowVacations from '../screens/ShowVacations';
+import Home from '../screens/Home';
+import Notes from '../screens/Notes';
+import Chat from '../screens/Chat';
+import Wallet from '../screens/Wallet';
+import Profile from '../screens/Profile';
 
 const MainNavigator = createStackNavigator(
     {
-        Login: {
-            screen: Login,
+        Home: {
+            screen: Home,
             navigationOptions: ({ navigation }) => ({
                 title: '',
                 headerTransparent: true,
                 headerLeft: null,
             })
         },
-        ApplyLeaves: {
-            screen: ApplyLeaves,
+        Notes: {
+            screen: Notes,
             navigationOptions: ({ navigation }) => ({
-                title: 'Apply Leaves',
-                headerTitleStyle: {
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                    flex: 0.8,
-                    fontSize: 15
-                }
+                title: '',
+                headerTransparent: true,
+                headerLeft: null,
             })
         },
-        ShowVacations: {
-            screen: ShowVacations,
+        Chat: {
+            screen: Chat,
             navigationOptions: ({ navigation }) => ({
-                title: 'Vacations',
-                headerTitleStyle: {
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                    flex: 0.8,
-                    fontSize: 15
-                }
+                title: '',
+                headerTransparent: true,
+                headerLeft: null,
             })
-        }
+        },
+        Wallet: {
+            screen: Wallet,
+            navigationOptions: ({ navigation }) => ({
+                title: '',
+                headerTransparent: true,
+                headerLeft: null,
+            })
+        },
+        Profile: {
+            screen: Profile,
+            navigationOptions: ({ navigation }) => ({
+                title: '',
+                headerTransparent: true,
+                headerLeft: null,
+            })
+        },
     },
     {
-        initialRouteName: 'Login'
+        initialRouteName: 'Home'
     }
 );
 
