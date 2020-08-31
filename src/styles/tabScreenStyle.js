@@ -16,8 +16,10 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginHorizontal: 10,
         elevation: 0,
+        alignItems: "center",
+        justifyContent: 'center',
         shadowColor: 'rgba(3, 147, 141,0.6)',
-        height: 60
+        height: 70
     },
 
     lookingforLabel: {
@@ -31,10 +33,8 @@ const styles = StyleSheet.create({
 
     searchView: {
         flex: 1,
-        flexDirection: 'row',
         height: 50,
         width: '100%',
-        alignSelf: 'flex-start',
         alignItems: 'center',
         borderRadius: 25,
         borderColor: '#bababa',
@@ -57,13 +57,31 @@ const styles = StyleSheet.create({
 
     imgbg: { width: 50, height: 50, marginStart: 8, marginEnd: 8, borderRadius: 25 },
 
-    chatView: { flex: 3, marginTop: 2 },
+    chatView: { flex: 1, marginTop: 2 },
 
-    name: { fontWeight: "bold" },
+    name: { fontWeight: "bold", fontSize: 18, color: 'black' },
 
-    time: { color: "#568aba", fontWeight: "bold" },
+    time: { color: "#568aba", fontWeight: "bold", fontSize: 18 },
 
-    dec: { color: "#bababa", fontWeight: "bold", },
+    dec: { color: 'black', fontWeight: "bold", fontSize: 18 },
+
+
+    // Assignment 2
+
+    submitButton: {
+        marginTop: 25,
+        backgroundColor: "#337869",
+        paddingHorizontal: 15,
+        paddingVertical: 5,
+        borderRadius: 5,
+        width: Dimensions.get('window').width / 3,
+        alignItems: 'center'
+    },
+    submiText: {
+        color: "white",
+        fontSize: 16,
+        fontWeight: "bold"
+    }
 
 });
 

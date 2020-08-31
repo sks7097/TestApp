@@ -15,9 +15,7 @@ export default class Wallet extends Component {
         return (
             <View style={styles.container}>
                 <Text>Wallet</Text>
-                <View style={styles.bottomTab}>
-                    <BottomTab navigation={this.props.navigation} />
-                </View>
+
             </View>
         );
     }

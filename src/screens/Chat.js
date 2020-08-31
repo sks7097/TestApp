@@ -1,141 +1,137 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, FlatList, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, ToastAndroid, AsyncStorage } from 'react-native';
 import styles from '../styles/tabScreenStyle'
 import CardView from 'react-native-cardview';
-import Search from 'react-native-vector-icons/MaterialIcons';
-import CardItem from '../components/cardItem'
-
-import BottomTab from '../components/BottomTab';
-
-
-const dataArray = [
-    {
-        "name": "Sushil",
-        "time": "1:30pm",
-        "description": "Great day ..........",
-        "img_url": "https://homepages.cae.wisc.edu/~ece533/images/serrano.png"
-    },
-    {
-        "name": "Haj",
-        "time": "5am",
-        "description": "I will sent by mail ...",
-        "img_url": "https://homepages.cae.wisc.edu/~ece533/images/zelda.png"
-    },
-    {
-        "name": "Krishna",
-        "time": "Yesterday",
-        "description": "Lot's of fun ..",
-        "img_url": "https://homepages.cae.wisc.edu/~ece533/images/watch.png"
-    },
-    {
-        "name": "Ramesh",
-        "time": "4pm",
-        "description": "Good To go ..",
-        "img_url": "https://homepages.cae.wisc.edu/~ece533/images/sails.png"
-    },
-    {
-        "name": "Suresh",
-        "time": "2pm",
-        "description": "Last Choice ..",
-        "img_url": "https://homepages.cae.wisc.edu/~ece533/images/fruits.png"
-    },
-    {
-        "name": "Arron",
-        "time": "5pm",
-        "description": "Ms Dhoni (7) Retires Cricket ..",
-        "img_url": "https://homepages.cae.wisc.edu/~ece533/images/sails.png"
-    },
-
-    {
-        "name": "Test Name",
-        "time": "6pm",
-        "description": "Ipl on Septmber ..",
-        "img_url": "https://homepages.cae.wisc.edu/~ece533/images/serrano.png"
-    },
-    {
-        "name": "Gita",
-        "time": "10:45am",
-        "description": "Raina (3) Retires Cricket ..",
-        "img_url": "https://homepages.cae.wisc.edu/~ece533/images/watch.png"
-    },
-    {
-        "name": "Arron",
-        "time": "5pm",
-        "description": "God is one for all ..",
-        "img_url": "https://homepages.cae.wisc.edu/~ece533/images/zelda.png"
-    },
-
-    {
-        "name": "Test Name",
-        "time": "6pm",
-        "description": "Have nice Day ..",
-        "img_url": "https://homepages.cae.wisc.edu/~ece533/images/serrano.png"
-    },
-    {
-        "name": "Gita Test",
-        "time": "10:45am",
-        "description": "Thank You React-Native ..",
-        "img_url": "https://homepages.cae.wisc.edu/~ece533/images/fruits.png"
-    },
-];
-
 
 export default class Chat extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            TaskName: "",
+            taskdec: "",
+            fromdate: "",
+            todate: "",
+            status: "To Start",
+            tasklist: []
         };
     }
 
 
+    displayData = async () => {
+        try {
+            let user = await AsyncStorage.getItem('user');
+            let parsed = JSON.parse(user);
+            this.props.navigation.navigate('Notes', { alltask: parsed, ScreenName: "Chat" })
+        } catch (error) {
+            alert(error)
+        }
+    }
+
+    addItem = async () => {
+        if (this.state.TaskName === "" || this.state.taskdec === "" || this.state.fromdate === "" || this.state.todate === "") {
+            ToastAndroid.show("Enter the mandetory fields", ToastAndroid.SHORT);
+        } else {
+            try {
+                let taskObj = {
+                    taskName: this.state.TaskName,
+                    taskDec: this.state.taskdec,
+                    fromDate: this.state.fromdate,
+                    toDate: this.state.todate,
+                    status: this.state.status
+                }
+
+                this.state.tasklist.push(taskObj)
+
+                AsyncStorage.setItem('user', JSON.stringify(this.state.tasklist));
+                ToastAndroid.show("task added", ToastAndroid.SHORT);
+
+                let user = await AsyncStorage.getItem('user');
+                let parsed = JSON.parse(user);
+                this.props.navigation.navigate('Notes', { alltask: parsed, ScreenName: "Chat" })
+            }
+            catch (error) {
+                alert(error)
+            }
+        }
+    }
 
     render() {
         return (
             <View style={styles.chatbg}>
-                <View style={styles.flatListStyle}>
-                    <Text style={{ color: "#3b4453", fontSize: 22, fontWeight: "bold", marginStart: 23, marginTop: 10 }}>Chats</Text>
-                </View>
-
                 <CardView
-                    style={styles.cardStyles}
+                    style={{ ...styles.cardStyles, marginBottom: 50 }}
                     cornerRadius={0}>
-                    <TouchableOpacity style={styles.searchView}>
-                        <Search
-                            name='search'
-                            color='black'
-                            style={styles.icon}
-                            size={25} />
-                        <Text style={styles.lookingforLabel}>Search</Text>
-                    </TouchableOpacity>
+                    <View>
+                        <TouchableOpacity style={styles.submitButton} onPress={() => { this.displayData() }}>
+                            <Text style={styles.submiText}>Show All Tasks</Text>
+                        </TouchableOpacity>
+                    </View>
                 </CardView>
 
-                <View style={styles.flatView}>
-                    <View style={{ flex: 1 }}>
-                        <FlatList
-                            data={dataArray}
-                            showsVerticalScrollIndicator={false}
-                            keyExtractor={(item, index) => index}
-                            renderItem={({ item, index }) => {
-                                return (
-                                    <CardItem
-                                        name={item.name}
-                                        time={item.time}
-                                        description={item.description}
-                                        img_url={item.img_url}
-                                    />
-
-                                )
-                            }}
+                <CardView
+                    style={{ ...styles.cardStyles, alignItems: "flex-start" }}
+                    cardElevation={3}
+                    cornerRadius={15}>
+                    <View>
+                        <TextInput
+                            style={{ fontWeight: "bold", fontSize: 18 }}
+                            value={this.state.TaskName}
+                            onChangeText={text => this.setState({ TaskName: text })}
+                            placeholder={" Task Name"}
                         />
-                        <View style={styles.btmView} />
+                    </View>
+                </CardView>
 
+                <CardView
+                    style={{ ...styles.cardStyles, alignItems: "flex-start" }}
+                    cardElevation={3}
+                    cornerRadius={15}>
+                    <View>
+                        <TextInput
+                            style={{ fontWeight: "bold", fontSize: 18 }}
+                            value={this.state.taskdec}
+                            onChangeText={text => this.setState({ taskdec: text })}
+                            placeholder={" Task Description"}
+                        />
                     </View>
 
+                </CardView>
 
+                <View style={{ width: "95%", flexDirection: "row" }}>
+                    <CardView
+                        style={{ ...styles.cardStyles, alignItems: "flex-start", flex: 1, }}
+                        cardElevation={3}
+                        cornerRadius={15}>
+                        <View>
+                            <TextInput
+                                style={{ fontWeight: "bold", fontSize: 18 }}
+                                value={this.state.fromdate}
+                                onChangeText={text => this.setState({ fromdate: text })}
+                                placeholder={" from date"}
+                            />
+                        </View>
 
+                    </CardView>
+
+                    <CardView
+                        style={{ ...styles.cardStyles, alignItems: "flex-start", flex: 1, }}
+                        cardElevation={3}
+                        cornerRadius={15}>
+                        <View>
+                            <TextInput
+                                style={{ fontWeight: "bold", fontSize: 18 }}
+                                value={this.state.todate}
+                                onChangeText={text => this.setState({ todate: text })}
+                                placeholder={" to date"}
+                            />
+                        </View>
+                    </CardView>
                 </View>
-                <View style={styles.bottomTab}>
-                    <BottomTab navigation={this.props.navigation} />
+
+                <View>
+                    <TouchableOpacity style={styles.submitButton} onPress={() => { this.addItem() }}>
+                        <Text style={styles.submiText}>Add Task</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );

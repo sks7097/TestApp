@@ -10,14 +10,19 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.12.0",
+    "native-base": "^2.13.14",
     "react": "16.13.1",
     "react-native": "0.63.0",
     "react-native-cardview": "^2.0.5",
+    "react-native-elements": "^2.2.1",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-progress": "^4.1.2",
+    "react-native-raw-bottom-sheet": "^2.2.0",
     "react-native-screens": "^2.9.0",
     "react-native-vector-icons": "^7.0.0",
-    "react-navigation": "^3.11.0"
+    "react-navigation": "^3.11.0",
+    "sync-storage": "^0.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",

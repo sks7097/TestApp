@@ -15,14 +15,16 @@ const CardItem = (props) => {
             cardElevation={0}
         >
             <View style={styles.itembg}>
-                <View style={styles.imgView}>
-                    <Image source={{ uri: props.img_url }}
-                        style={styles.imgbg} />
-                </View>
+
                 <View style={styles.chatView}>
-                    <Text style={styles.name}>{props.name}</Text>
-                    <Text style={styles.dec}>{props.description}</Text>
-                    <Text style={styles.time}>{props.time}</Text>
+                    <Text style={styles.name}>Task Name : {props.name}</Text>
+                    <Text style={styles.dec}>Task Description : {props.description}</Text>
+                    <Text style={styles.time}>From Date : {props.fromDate} To Date {props.toDate}</Text>
+                    <Text style={styles.time}>Status : {props.status}</Text>
+                </View>
+
+                <View style={{ flex: 0.6, }}>
+
                 </View>
             </View>
         </CardView>
