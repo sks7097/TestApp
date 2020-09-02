@@ -6,6 +6,7 @@ import Notes from '../screens/Notes';
 import Chat from '../screens/Chat';
 import Wallet from '../screens/Wallet';
 import Profile from '../screens/Profile';
+import QrScanner from '../screens/QrScanner'
 
 const MainNavigator = createStackNavigator(
     {
@@ -49,9 +50,17 @@ const MainNavigator = createStackNavigator(
                 headerLeft: null,
             })
         },
+        QrScanner: {
+            screen: QrScanner,
+            navigationOptions: ({ navigation }) => ({
+                title: '',
+                headerTransparent: true,
+                headerLeft: null,
+            })
+        },
     },
     {
-        initialRouteName: 'Home'
+        initialRouteName: 'Wallet'
     }
 );
 
