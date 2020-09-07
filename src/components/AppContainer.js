@@ -4,7 +4,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Home from '../screens/Home';
 import Notes from '../screens/Notes';
 import Chat from '../screens/Chat';
-import Wallet from '../screens/Wallet';
+import CItyList from '../screens/CItyList';
 import Profile from '../screens/Profile';
 import QrScanner from '../screens/QrScanner'
 
@@ -34,8 +34,8 @@ const MainNavigator = createStackNavigator(
                 headerLeft: null,
             })
         },
-        Wallet: {
-            screen: Wallet,
+        CItyList: {
+            screen: CItyList,
             navigationOptions: ({ navigation }) => ({
                 title: '',
                 headerTransparent: true,
@@ -60,7 +60,7 @@ const MainNavigator = createStackNavigator(
         },
     },
     {
-        initialRouteName: 'Wallet'
+        initialRouteName: 'CItyList'
     }
 );
 
